@@ -8,11 +8,11 @@ const router = express.Router(); // Instancia de metodo Router() de Express
 */
 
 router.get('/', (req, res) => {
-   res.json('Hola soy cliente')
+   res.json('Hola soy ruta usuario')
 })
 
 router.get('/updates', (req, res) => {
-   res.json('Cliente actualizado')
+   res.json('Usuario actualizado')
 })
 
 module.exports = router
