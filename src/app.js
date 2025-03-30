@@ -5,6 +5,8 @@ const usuarios = require('./modulos/usuarios/rutas_usuarios.js')
 
 const app = express(); // Instancia de Express en este archivo
 
+app.use(express.json());
+
 app.set('port', config.app.port);// Enlace o conexión al puerto asignado en config.js
 
 
