@@ -11,24 +11,37 @@ const controlador = require('./controlador.js')
    muestran en JSON un mensaje de un funcionamiento correcto del servidor
 */
 
-// router.get('/', (req, res) => {
-//    res.json('Hola soy cliente')
-// })
+// Ruta princpal para acceder a la seccion "clientes" de la API
+router.get('/', async function (req, res) {
 
-// router.get('/updates', (req, res) => {
-//    // res.json('Cliente actualizado')
-//    respuesta.error(req, res, 500)
-// })
+   try {
+      const item = await controlador.todos()
+      respuesta.success(req, res, 200, item)
+      
+   } catch (error) {
+      respuesta.error(req, res, 500, error)
+   }
 
-router.get('/', (req, res) => {
+})
 
-   const consult = controlador.todos()
-
-   respuesta.success(req, res, 200, consult)
+// Ruta de un solo registro por medio del ID
+router.get("/:id", async function(req, res) {
+   try {
+       const item =await controlador.uno(req.params.id)
+       respuesta.success(req, res, 200, item)
+   } catch (error) {
+       respuesta.error(req, res, 500, error)
+       
+   } 
 })
 
 router.post('/agregar', (req, res) => {
-   console.log(req.body)
+   // console.log(req.body)
+
+   const agregar = controlador.agregar(req.body)
+
+   respuesta.success(req, res, 200, agregar)
+
 })
 
 module.exports = router
