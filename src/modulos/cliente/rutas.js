@@ -35,13 +35,41 @@ router.get("/:id", async function(req, res) {
    } 
 })
 
-router.post('/agregar', (req, res) => {
-   // console.log(req.body)
+// Ruta que agrega un cliente
+router.post('/agregar', async (req, res) => {
+   try {
+      const result = await controlador.agregar(req.body);
+      respuesta.success(req, res, 201, {
+         mensaje: 'Cliente agregado correctamente',
+         id: result.insertId
+      });
+   } catch (error) {
+      respuesta.error(req, res, 500, error);
+   }
+});
 
-   const agregar = controlador.agregar(req.body)
+// Ruta que elimina por ID
+router.delete('/:id', async (req, res) => {
+   try {
+      const result = await controlador.eliminar(req.params.id);
+      respuesta.success(req, res, 200, {
+         mensaje: 'Cliente eliminado correctamente'
+      });
+   } catch (error) {
+      respuesta.error(req, res, 500, error);
+   }
+});
 
-   respuesta.success(req, res, 200, agregar)
-
-})
+// Ruta que actualiza por ID
+router.put('/:id', async (req, res) => {
+   try {
+      const result = await controlador.actualizar(req.params.id, req.body);
+      respuesta.success(req, res, 200, {
+         mensaje: 'Cliente actualizado correctamente'
+      });
+   } catch (error) {
+      respuesta.error(req, res, 500, error);
+   }
+});
 
 module.exports = router

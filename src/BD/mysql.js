@@ -61,20 +61,31 @@ function uno(tabla, id){
 }
 
 // Agrega un campo a la tabla
-function agregar (data) {
-
-   // const datos = {
-   //    tabla: tabla,
-   //    data: data
-   // }
-
-   // return (datos)
+function agregar(tabla, data) {
+   return new Promise((resolve, reject) => {
+      conexion.query(`INSERT INTO ${tabla} SET ?`, data, (error, result) => {
+         return error ? reject(error) : resolve(result);
+      });
+   });
 }
 
 
 // Elimina un campo a la tabla
-function eliminar (tabla, id) {
-
+function eliminar(tabla, id) {
+   return new Promise((resolve, reject) => {
+      conexion.query(`DELETE FROM ${tabla} WHERE id = ${id}`, (error, result) => {
+         return error ? reject(error) : resolve(result);
+      });
+   });
 }
 
-module.exports = { todos, uno, agregar, eliminar}
+// Actualiza un registro en la tabla
+function actualizar(tabla, data) {
+   return new Promise((resolve, reject) => {
+      conexion.query(`UPDATE ${tabla} SET ? WHERE id = ?`, [data, data.id], (error, result) => {
+         return error ? reject(error) : resolve(result);
+      });
+   });
+}
+
+module.exports = { todos, uno, agregar, eliminar, actualizar}

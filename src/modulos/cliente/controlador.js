@@ -17,8 +17,14 @@ function agregar(body) {
 }
 
 // Elimina un campo a la tabla
-function eliminar(body) {
-   return baseDeDatos.eliminar(TABLA,body)
+function eliminar(id) {
+   return baseDeDatos.eliminar(TABLA, id);
 }
 
-module.exports = { todos, uno, agregar, eliminar}
+// Actualiza un campo en la tabla
+function actualizar(id, body) {
+   body.id = id;
+   return baseDeDatos.actualizar(TABLA, body);
+}
+
+module.exports = { todos, uno, agregar, eliminar, actualizar}
