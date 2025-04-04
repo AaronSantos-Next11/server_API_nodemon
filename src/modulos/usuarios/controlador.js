@@ -1,9 +1,9 @@
-
+const bd = require('../../BD/mysql')
 const TABLA = 'usuarios';
 
 //*  Metodos para la base de datos y hacer las consultas
-function todos (tabla) {
-
+function todos () {
+   return bd.todos(TABLA)
 }
 
 // Consulta de un solo registro por medio del ID
