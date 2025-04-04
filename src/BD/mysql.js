@@ -88,4 +88,15 @@ function actualizar(tabla, data) {
    });
 }
 
-module.exports = { todos, uno, agregar, eliminar, actualizar}
+
+//! Buscar usuario por email
+
+function query(tabla, consulta) {
+   return new Promise((resolve, reject) => {
+      conexion.query(`SELECT * FROM ${tabla} WHERE ?`, consulta, (error, result) => {
+         return error ? reject(error) : resolve(result[0]);
+      });
+   });
+}
+
+module.exports = { todos, uno, agregar, eliminar, actualizar, query}
