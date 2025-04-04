@@ -14,6 +14,6 @@ app.set('port', config.app.port);// Enlace o conexión al puerto asignado en con
 
 app.use('/api/clientes', clientes);
 
-app.use('/api/user', usuarios)
+app.use('/api/usuarios', usuarios)
 
 module.exports = app;
